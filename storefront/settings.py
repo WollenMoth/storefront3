@@ -181,3 +181,7 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 2525
 DEFAULT_FROM_EMAIL = 'andre@diaz.com'
+
+ADMINS = [
+    ('Andre Díaz', 'crhistian.diazb@alumno.buap.mx')
+]
