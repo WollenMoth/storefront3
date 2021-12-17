@@ -185,3 +185,5 @@ DEFAULT_FROM_EMAIL = 'andre@diaz.com'
 ADMINS = [
     ('Andre Díaz', 'crhistian.diazb@alumno.buap.mx')
 ]
+
+CELERY_BROKER_URL = 'redis://localhost:6379/1'
