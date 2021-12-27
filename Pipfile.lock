@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f125b646b698b33259d8d61b81b888e90d6a50ef630ddd627d77ae8140340f3b"
+            "sha256": "7b0eccf04ef794dca13f7a241d88dc5bd3554e6e793241973e73debaa802f685"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -31,6 +31,13 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==3.4.1"
+        },
+        "autopep8": {
+            "hashes": [
+                "sha256:44f0932855039d2c15c4510d6df665e4730f2b8582704fa48f9c55bd3e17d979",
+                "sha256:ed77137193bbac52d029a52c59bec1b0629b5a186c495f1eb21b126ac466083f"
+            ],
+            "version": "==1.6.0"
         },
         "billiard": {
             "hashes": [
@@ -259,6 +266,14 @@
             "index": "pypi",
             "version": "==5.2.0"
         },
+        "django-silk": {
+            "hashes": [
+                "sha256:5e70b5351f04e3c4ea4fe6bc16c95bfee776006422dd5e7827e6e3db23dc41ec",
+                "sha256:fcc2e3b2d20aab24a0b4b856d9692c532f8071b0e678cb5f4de47b802e85fe3e"
+            ],
+            "index": "pypi",
+            "version": "==4.2.0"
+        },
         "django-templated-mail": {
             "hashes": [
                 "sha256:8db807effebb42a532622e2d142dfd453dafcd0d7794c4c3332acb90656315f9",
@@ -306,6 +321,12 @@
             ],
             "index": "pypi",
             "version": "==1.0.0"
+        },
+        "gprof2dot": {
+            "hashes": [
+                "sha256:1223189383b53dcc8ecfd45787ac48c0ed7b4dbc16ee8b88695d053eea1acabf"
+            ],
+            "version": "==2021.2.21"
         },
         "gunicorn": {
             "hashes": [
@@ -519,12 +540,28 @@
             "markers": "python_full_version >= '3.6.2'",
             "version": "==3.0.24"
         },
+        "pycodestyle": {
+            "hashes": [
+                "sha256:720f8b39dde8b293825e7ff02c475f3077124006db4f440dcbc9a20b76548a20",
+                "sha256:eddd5847ef438ea1c7870ca7eb78a9d47ce0cdb4851a5523949f2601d0cbbe7f"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'",
+            "version": "==2.8.0"
+        },
         "pycparser": {
             "hashes": [
                 "sha256:8ee45429555515e1f6b185e78100aea234072576aa43ab53aefcae078162fca9",
                 "sha256:e644fdec12f7872f86c58ff790da456218b10f863970249516d60a5eaca77206"
             ],
             "version": "==2.21"
+        },
+        "pygments": {
+            "hashes": [
+                "sha256:b8e67fe6af78f492b3c4b3e2970c0624cbf08beb1e493b2c99b9fa1b67a20380",
+                "sha256:f398865f7eb6874156579fdf36bc840a03cab64d1cde9e93d68f46a425ec52c6"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==2.10.0"
         },
         "pyjwt": {
             "hashes": [
@@ -541,6 +578,14 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==3.0.6"
+        },
+        "python-dateutil": {
+            "hashes": [
+                "sha256:0123cacc1627ae19ddf3c27a5de5bd67ee4586fbdd6440d9748f8abb483d3e86",
+                "sha256:961d03dc3453ebbc59dbdea9e4e11c5651520a876d0f4db161e8674aae935da9"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==2.8.2"
         },
         "python3-openid": {
             "hashes": [
@@ -619,6 +664,14 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.2"
+        },
+        "toml": {
+            "hashes": [
+                "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b",
+                "sha256:b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f"
+            ],
+            "markers": "python_version >= '2.6' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==0.10.2"
         },
         "tornado": {
             "hashes": [
@@ -802,7 +855,6 @@
                 "sha256:44f0932855039d2c15c4510d6df665e4730f2b8582704fa48f9c55bd3e17d979",
                 "sha256:ed77137193bbac52d029a52c59bec1b0629b5a186c495f1eb21b126ac466083f"
             ],
-            "index": "pypi",
             "version": "==1.6.0"
         },
         "brotli": {
