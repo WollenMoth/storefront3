@@ -157,13 +157,13 @@ ADMINS = [
     ('Andre Díaz', 'crhistian.diazb@alumno.buap.mx')
 ]
 
-CELERY_BEAT_SCHEDULE = {
-    'notify_customers': {
-        'task': 'playground.tasks.notify_customers',
-        'schedule': 5,
-        'args': ['Hello World']
-    }
-}
+# CELERY_BEAT_SCHEDULE = {
+#     'notify_customers': {
+#         'task': 'playground.tasks.notify_customers',
+#         'schedule': 5,
+#         'args': ['Hello World']
+#     }
+# }
 
 LOGGING = {
     'version': 1,
