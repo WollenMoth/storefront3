@@ -1,4 +1,3 @@
-from store.models import Customer
 from djoser.serializers import UserSerializer as BaseUserSerializer, UserCreateSerializer as BaseUserCreateSerializer
 
 
