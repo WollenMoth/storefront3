@@ -1,4 +1,4 @@
-version: '3.10'
+version: '3.10.2'
 services:
   web:
     build: .
