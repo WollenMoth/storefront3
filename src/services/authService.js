@@ -5,6 +5,8 @@ const apiEndpoint = "/auth/jwt/";
 const tokenRefreshKey = "refresh";
 const tokenAccessKey = "access";
 
+setJwt();
+
 export async function login(user) {
   const { data: jwt } = await http.post(`${apiEndpoint}create/`, user);
   loginWithJwt(jwt);
@@ -13,13 +15,11 @@ export async function login(user) {
 export function loginWithJwt(jwt) {
   localStorage.setItem(tokenRefreshKey, jwt.refresh);
   localStorage.setItem(tokenAccessKey, jwt.access);
-  setJwt();
 }
 
 export function logout() {
   localStorage.removeItem(tokenAccessKey);
   localStorage.removeItem(tokenRefreshKey);
-  setJwt();
 }
 
 export async function refresh() {
