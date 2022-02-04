@@ -5,6 +5,7 @@ import NavBar from "./components/navBar";
 import HomePage from "./components/homePage";
 import NotFound from "./components/notFound";
 import Products from "./components/products";
+import RegisterForm from "./components/registerForm";
 import LoginForm from "./components/loginForm";
 import Logout from "./components/logout";
 import auth from "./services/authService";
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/logout" element={<Logout />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/register" element={<RegisterForm />} />
           <Route path="/products" element={<Products />} />
           <Route path="/not-found" element={<NotFound />} />
           <Route path="/" element={<HomePage />} />
