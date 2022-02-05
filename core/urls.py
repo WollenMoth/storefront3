@@ -1,7 +1,12 @@
-from django.views.generic import TemplateView
-from django.urls import path
+from django.urls import re_path
+from rest_framework_simplejwt import views
+from . import views as customViews
 
-# URLConf
+
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='index.html')),
+    re_path(r"^jwt/create/?",
+            customViews.TokenObtainPairView.as_view(), name="jwt-create"),
+    re_path(r"^jwt/refresh/?", views.TokenRefreshView.as_view(),
+            name="jwt-refresh"),
+    re_path(r"^jwt/verify/?", views.TokenVerifyView.as_view(), name="jwt-verify"),
 ]
