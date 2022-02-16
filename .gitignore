@@ -1,5 +1,6 @@
 *.db
 *.log
+*.env
 *.pyc
 *.pyc.*
 /media/

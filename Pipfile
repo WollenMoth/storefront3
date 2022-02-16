@@ -33,6 +33,7 @@ pytest-watch = "*"
 model-bakery = "*"
 locust = "*"
 django-silk = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.10"
