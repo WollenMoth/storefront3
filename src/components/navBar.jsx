@@ -32,7 +32,7 @@ function NavBar({ user }) {
               </NavLink>
             </li>
           </ul>
-          <form className="d-flex align-items-end nav-form">
+          <form className="d-flex align-items-end mb-lg-0">
             <input
               className="form-control me-2"
               type="search"
