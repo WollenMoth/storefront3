@@ -23,7 +23,6 @@ whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
 django-silk = "*"
-django-s3direct = "*"
 
 [dev-packages]
 autopep8 = "*"
@@ -33,7 +32,6 @@ pytest-watch = "*"
 model-bakery = "*"
 locust = "*"
 django-silk = "*"
-python-dotenv = "*"
 
 [requires]
 python_version = "3.10"
