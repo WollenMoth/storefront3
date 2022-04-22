@@ -1,5 +1,5 @@
-import { Fragment, useState, useEffect } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import NavBar from "./components/navBar";
 import HomePage from "./components/homePage";
@@ -20,7 +20,7 @@ function App() {
   }, []);
 
   return (
-    <Fragment>
+    <BrowserRouter>
       <ToastContainer />
       <NavBar user={user} />
       <main className="container">
@@ -34,7 +34,7 @@ function App() {
           <Route path="*" element={<Navigate to="/not-found" />} />
         </Routes>
       </main>
-    </Fragment>
+    </BrowserRouter>
   );
 }
 
