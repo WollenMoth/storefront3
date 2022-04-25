@@ -1,4 +1,4 @@
-version: '3.10.2'
+version: "3.8"
 services:
   web:
     build: .
@@ -20,7 +20,7 @@ services:
       - MYSQL_DATABASE=storefront3
       - MYSQL_ROOT_PASSWORD=Alitheia2908
     volumes:
-      - mysqldata:/var/lib/mysql     
+      - mysqldata:/var/lib/mysql
   redis:
     image: redis:6.2-alpine
     ports:
@@ -74,4 +74,4 @@ services:
 volumes:
   mysqldata:
   pgdata:
-  redisdata:    
+  redisdata:
