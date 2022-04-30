@@ -23,6 +23,9 @@ whitenoise = "*"
 gunicorn = "*"
 dj-database-url = "*"
 django-silk = "*"
+django-storages = "*"
+boto3 = "*"
+python-dotenv = "*"
 
 [dev-packages]
 autopep8 = "*"
