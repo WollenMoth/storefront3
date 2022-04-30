@@ -29,7 +29,6 @@ urlpatterns = [
     re_path(r'^store/', include('store.urls')),
     re_path(r'^auth/', include('djoser.urls')),
     re_path(r'^auth/', include('core.urls')),
-    re_path(r'^s3direct/', include('s3direct.urls')),
     re_path(r'^__debug__/', include(debug_toolbar.urls)),
 ]
 
