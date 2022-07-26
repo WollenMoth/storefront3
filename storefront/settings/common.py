@@ -66,8 +66,8 @@ INTERNAL_IPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8001',
-    'http://127.0.0.1:8001',
+    'http://localhost',
+    'http://127.0.0.1',
 ]
 
 ROOT_URLCONF = 'storefront.urls'
@@ -131,17 +131,9 @@ AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-AWS_S3_OBJECT_PARAMETERS = {
-    'CacheControl': 'max-age=86400'
-}
-
 AWS_LOCATION = 'static'
 
 AWS_QUERYSTRING_AUTH = False
-
-AWS_HEADERS = {
-    'Access-Control-Allow-Origin': '*',
-}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
