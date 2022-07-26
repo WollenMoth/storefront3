@@ -4,7 +4,7 @@ services:
     build: .
     command: ./wait-for-it.sh mysql:3306 -- ./docker-entrypoint.sh
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - redis
       - mysql
@@ -14,7 +14,7 @@ services:
   mysql:
     image: mysql:8.0
     ports:
-      - 3306:3306
+      - "3307:3306"
     restart: always
     environment:
       - MYSQL_DATABASE=storefront3
@@ -24,15 +24,15 @@ services:
   redis:
     image: redis:6.2-alpine
     ports:
-      - 6379:6379
+      - "6379:6379"
     restart: always
     volumes:
       - redisdata:/data
   smtp4dev:
     image: rnwood/smtp4dev:v3
     ports:
-      - 5000:80
-      - 25:25
+      - "5000:80"
+      - "25:25"
     restart: always
   celery:
     build: .
@@ -69,7 +69,7 @@ services:
       - CELERY_BROKER=redis://redis:6379/0
       - CELERY_BACKEND=redis://redis:6379/0
     ports:
-      - 5555:5555
+      - "5555:5555"
     restart: on-failure
 volumes:
   mysqldata:
