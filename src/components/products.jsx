@@ -23,7 +23,7 @@ function Products(props) {
   }, []);
 
   return (
-    <div className="row">
+    <div className="row row-cols-auto justify-content-center gap-4 mb-4">
       {products.results &&
         products.results.map((product) => (
           <div className="col" key={product.id}>
