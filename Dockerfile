@@ -1,4 +1,4 @@
-FROM python:3.10.4
+FROM python:3.11.8
 
 ENV PYTHONUNBUFFERED=1
 WORKDIR /app
