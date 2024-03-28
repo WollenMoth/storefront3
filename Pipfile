@@ -32,12 +32,19 @@ python-dotenv = "*"
 
 [dev-packages]
 autopep8 = "*"
+black = "*"
+django-silk = "*"
+djlint = "*"
+flake8 = "*"
+isort = "*"
+locust = "*"
+model-bakery = "*"
+pre-commit = "*"
+pylint = "*"
+pylint-django = "*"
 pytest = "*"
 pytest-django = "*"
 pytest-watch = "*"
-model-bakery = "*"
-locust = "*"
-django-silk = "*"
 
 [requires]
 python_version = "3.11"

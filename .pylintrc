@@ -1,0 +1,2 @@
+load-plugins=pylint_django
+django-settings-module=storefront.settings.dev
