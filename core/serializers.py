@@ -1,10 +1,10 @@
-from djoser.serializers import (
-    UserSerializer as BaseUserSerializer,
-    UserCreateSerializer as BaseUserCreateSerializer,
-)
+from djoser.serializers import UserCreateSerializer as BaseUserCreateSerializer
+from djoser.serializers import UserSerializer as BaseUserSerializer
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import (
+    TokenObtainPairSerializer as BaseTokenObtainPairSerializer,
+)
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.serializers import TokenObtainPairSerializer as BaseTokenObtainPairSerializer
 
 
 class UserCreateSerializer(BaseUserCreateSerializer):
@@ -16,18 +16,25 @@ class UserCreateSerializer(BaseUserCreateSerializer):
         addClaims(refresh, user)
 
         return {
-            'refresh': str(refresh),
-            'access': str(refresh.access_token),
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
         }
 
     class Meta(BaseUserCreateSerializer.Meta):
-        fields = ['id', 'username', 'password',
-                  'email', 'first_name', 'last_name', 'token']
+        fields = [
+            "id",
+            "username",
+            "password",
+            "email",
+            "first_name",
+            "last_name",
+            "token",
+        ]
 
 
 class UserSerializer(BaseUserSerializer):
     class Meta(BaseUserSerializer.Meta):
-        fields = ['id', 'username', 'email', 'first_name', 'last_name']
+        fields = ["id", "username", "email", "first_name", "last_name"]
 
 
 class TokenObtainPairSerializer(BaseTokenObtainPairSerializer):
@@ -41,7 +48,7 @@ class TokenObtainPairSerializer(BaseTokenObtainPairSerializer):
 
 
 def addClaims(token, user):
-    token['username'] = user.username
-    token['email'] = user.email
-    token['is_staff'] = user.is_staff
+    token["username"] = user.username
+    token["email"] = user.email
+    token["is_staff"] = user.is_staff
     return token
