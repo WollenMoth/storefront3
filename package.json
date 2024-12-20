@@ -9,7 +9,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@sentry/react": "^8.13.0",
+    "@sentry/react": "^8.47.0",
     "@sentry/tracing": "^7.114.0",
     "@testing-library/jest-dom": "^6.4.6",
     "@testing-library/react": "^15.0.7",
