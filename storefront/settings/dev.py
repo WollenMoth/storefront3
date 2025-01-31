@@ -1,21 +1,13 @@
+import socket
+
 from .common import *  # noqa: F401, F403
-from .common import MIDDLEWARE, os
+from .common import INTERNAL_IPS, MIDDLEWARE, env
 
 DEBUG = True
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 MIDDLEWARE += ("silk.middleware.SilkyMiddleware",)
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "storefront3",
-        "HOST": "mysql",
-        "USER": "root",
-        "PASSWORD": os.environ.get("MYSQL_ROOT_PASSWORD"),
-    }
-}
 
 CELERY_BROKER_URL = "redis://redis:6379/0"
 
@@ -35,6 +27,7 @@ EMAIL_HOST_USER = ""
 EMAIL_HOST_PASSWORD = ""
 EMAIL_PORT = 2525
 
-DEBUG_TOOLBAR_CONFIG = {"SHOW_TOOLBAR_CALLBACK": lambda request: True}
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS += [ip[: ip.rfind(".")] + ".1" for ip in ips]
 
 MEDIA_URL = "/media/"

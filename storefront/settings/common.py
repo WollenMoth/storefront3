@@ -14,9 +14,10 @@ import mimetypes
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+from environs import Env
 
-load_dotenv()
+env = Env()
+env.read_env()
 
 mimetypes.add_type("text/css", ".css", True)
 mimetypes.add_type("application/javascript", ".js", True)
@@ -60,11 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-INTERNAL_IPS = [
-    # ...
-    "127.0.0.1",
-    # ...
-]
+INTERNAL_IPS = ["127.0.0.1"]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost",
@@ -90,6 +87,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "storefront.wsgi.application"
+
+DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
 
 
 # Password validation
@@ -183,7 +182,7 @@ LOGGING = {
     "loggers": {
         "": {
             "handlers": ["console", "file"],
-            "level": os.environ.get("DJANGO_LOG_LEVEL", "INFO"),
+            "level": env("DJANGO_LOG_LEVEL", "INFO"),
         }
     },
     "formatters": {

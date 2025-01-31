@@ -1,25 +1,26 @@
 services:
   web:
     build: .
-    command: ./wait-for-it.sh mysql:3306 -- ./docker-entrypoint.sh
+    command: ./wait-for-it.sh db:3306 -- ./docker-entrypoint.sh
     ports:
       - "80:80"
     depends_on:
       - redis
-      - mysql
+      - db
     restart: on-failure
     volumes:
       - .:/app
-  mysql:
-    image: mysql:8.0
+  db:
+    image: postgres:latest
     ports:
-      - "3307:3306"
+      - "5433:5432"
     restart: always
     environment:
-      - MYSQL_DATABASE=storefront3
-      - MYSQL_ROOT_PASSWORD=Alitheia2908
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=abcd1234
+      - POSTGRES_DB=storefront3
     volumes:
-      - mysqldata:/var/lib/mysql
+      - pgdata:/var/lib/postgresql/data
   redis:
     image: redis:6.2-alpine
     ports:
@@ -49,10 +50,10 @@ services:
       - .:/app
   tests:
     build: .
-    command: ./wait-for-it.sh mysql:3306 -- ptw
+    command: ./wait-for-it.sh db:3306 -- ptw
     depends_on:
       - redis
-      - mysql
+      - db
     tty: true
     volumes:
       - .:/app
@@ -71,6 +72,5 @@ services:
       - "5555:5555"
     restart: on-failure
 volumes:
-  mysqldata:
   pgdata:
   redisdata:
