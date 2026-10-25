@@ -5,7 +5,7 @@ description = "Storefront API built with Django REST Framework"
 requires-python = ">=3.14,<3.16"
 dependencies = [
     "celery[redis]>=5.6.3,<6",
-    "django>=5.2.18,<5.3",
+    "django>=5.2.18,<6.2",
     "django-cors-headers>=4.9.0,<5",
     "django-filter>=26.2,<27",
     "django-storages[s3]>=1.14.6,<2",
