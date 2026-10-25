@@ -5,16 +5,18 @@ DEBUG = False
 
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["andrebuy.herokuapp.com"]
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["andrebuy.herokuapp.com"])
 
 CELERY_BROKER_URL = env("REDIS_URL")
 
-CACHES = {"default": env.dj_cache_url("REDIS_URL", conn_max_age=10 * 60)}
+CACHES = {"default": env.dj_cache_url("CACHE_URL", default=CELERY_BROKER_URL)}
+CACHES["default"].setdefault("TIMEOUT", env.int("CACHE_TIMEOUT", default=600))
 
-EMAIL_HOST = env("MAILGUN_SMTP_SERVER")
-EMAIL_HOST_USER = env("MAILGUN_SMTP_LOGIN")
-EMAIL_HOST_PASSWORD = env("MAILGUN_SMTP_PASSWORD")
-EMAIL_PORT = env("MAILGUN_SMTP_PORT")
+if not env("EMAIL_URL", default=None):
+    EMAIL_HOST = env("MAILGUN_SMTP_SERVER")
+    EMAIL_HOST_USER = env("MAILGUN_SMTP_LOGIN")
+    EMAIL_HOST_PASSWORD = env("MAILGUN_SMTP_PASSWORD")
+    EMAIL_PORT = env.int("MAILGUN_SMTP_PORT")
 
 # AWS S3 Settings
 
@@ -32,8 +34,9 @@ AWS_QUERYSTRING_AUTH = False
 
 # Static files (CSS, JavaScript, Images)
 
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3StaticStorage"
+STORAGES = {
+    "default": {"BACKEND": "storages.backends.s3.S3Storage"},
+    "staticfiles": {"BACKEND": "storages.backends.s3.S3StaticStorage"},
+}
 
 MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/media/"

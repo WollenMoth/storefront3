@@ -38,10 +38,8 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "djoser",
-    "silk",
     "storages",
     "playground",
-    "debug_toolbar",
     "store",
     "tags",
     "likes",
@@ -50,7 +48,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
-    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -63,10 +60,9 @@ MIDDLEWARE = [
 
 INTERNAL_IPS = ["127.0.0.1"]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost",
-    "http://127.0.0.1",
-]
+CORS_ALLOWED_ORIGINS = env.list(
+    "CORS_ALLOWED_ORIGINS", default=["http://localhost", "http://127.0.0.1"]
+)
 
 ROOT_URLCONF = "storefront.urls"
 
@@ -88,7 +84,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "storefront.wsgi.application"
 
-DATABASES = {"default": env.dj_db_url("DATABASE_URL")}
+DATABASES = {
+    "default": env.dj_db_url(
+        "DATABASE_URL",
+        conn_max_age=env.int("DATABASE_CONN_MAX_AGE", default=0),
+        conn_health_checks=env.bool("DATABASE_CONN_HEALTH_CHECKS", default=True),
+    )
+}
 
 
 # Password validation
@@ -158,6 +160,16 @@ SIMPLE_JWT = {
 
 DEFAULT_FROM_EMAIL = "andre@diaz.com"
 
+EMAIL_CONFIG = env.dj_email_url("EMAIL_URL", default="smtp://localhost:2525")
+EMAIL_BACKEND = EMAIL_CONFIG["EMAIL_BACKEND"]
+EMAIL_HOST = EMAIL_CONFIG["EMAIL_HOST"]
+EMAIL_PORT = EMAIL_CONFIG["EMAIL_PORT"]
+EMAIL_HOST_USER = EMAIL_CONFIG["EMAIL_HOST_USER"] or ""
+EMAIL_HOST_PASSWORD = EMAIL_CONFIG["EMAIL_HOST_PASSWORD"] or ""
+EMAIL_USE_TLS = EMAIL_CONFIG["EMAIL_USE_TLS"]
+EMAIL_USE_SSL = EMAIL_CONFIG["EMAIL_USE_SSL"]
+EMAIL_TIMEOUT = EMAIL_CONFIG["EMAIL_TIMEOUT"]
+
 ADMINS = [("Andre Díaz", "crhistian.diazb@alumno.buap.mx")]
 
 # CELERY_BEAT_SCHEDULE = {
@@ -173,15 +185,10 @@ LOGGING = {
     "disable_existing_loggers": False,
     "handlers": {
         "console": {"class": "logging.StreamHandler"},
-        "file": {
-            "class": "logging.FileHandler",
-            "filename": "general.log",
-            "formatter": "verbose",
-        },
     },
     "loggers": {
         "": {
-            "handlers": ["console", "file"],
+            "handlers": ["console"],
             "level": env("DJANGO_LOG_LEVEL", "INFO"),
         }
     },
