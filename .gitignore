@@ -2,6 +2,11 @@
 *.log
 *.pyc
 *.pyc.*
+.venv/
+.venv-*/
+.ruff_cache/
+.pytest_cache/
+__pycache__/
 /media/
 /static/
 /.vscode/

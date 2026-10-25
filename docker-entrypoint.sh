@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/bin/sh
+set -eu
 
-# Apply database migrations
-echo "Apply database migrations"
-python manage.py migrate
+# Opt in on exactly one release job, rather than racing every worker startup.
+if [ "${RUN_MIGRATIONS:-0}" = "1" ]; then
+    python manage.py migrate --noinput
+fi
 
-# Start server
-echo "Starting server"
-python manage.py runserver 0.0.0.0:80
+exec "$@"

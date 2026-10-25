@@ -1,33 +1,46 @@
-# See https://pre-commit.com for more information
-# See https://pre-commit.com/hooks.html for more hooks
-repos:
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.5.0
-    hooks:
-    -   id: trailing-whitespace
-    -   id: end-of-file-fixer
-    -   id: check-added-large-files
--   repo: https://github.com/psf/black
-    rev: 23.12.1
-    hooks:
-    -   id: black
-        language_version: python3.11
--   repo: https://github.com/pycqa/isort
-    rev: 5.13.2
-    hooks:
-    -   id: isort
-        name: isort (python)
--   repo: https://github.com/pycqa/flake8
-    rev: 7.0.0
-    hooks:
-    -   id: flake8
--   repo: https://github.com/Riverside-Healthcare/djLint
-    rev: v1.34.1
-    hooks:
-    -   id: djlint-django
+default_install_hook_types: [pre-commit, pre-push]
+default_stages: [pre-commit]
 
-exclude: |
-    (?x)^(
-        .*/migrations/.*|
-        .*/scripts/.*
-    )$
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.17.2
+    hooks:
+      - id: ruff-check
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/markdownlint/markdownlint
+    rev: v0.18.1
+    hooks:
+      - id: markdownlint_docker
+        args: [--rules, "~MD013"]
+
+  - repo: https://github.com/Riverside-Healthcare/djLint
+    rev: v1.47.0
+    hooks:
+      - id: djlint-django
+
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.13.5
+    hooks:
+      - id: uv-lock
+      - id: uv-export
+        args: [--frozen, --no-dev, --output-file=requirements.txt, --quiet]
+
+  - repo: local
+    hooks:
+      - id: project-checks
+        name: Django, migrations, pytest, dependency integrity and security
+        entry: uv run --locked python scripts/check.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-push]
