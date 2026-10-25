@@ -1,24 +1,30 @@
-FROM python:3.11.8
-
-ENV PYTHONUNBUFFERED=1
+FROM python:3.14.9-slim-bookworm AS base
+COPY --from=ghcr.io/astral-sh/uv:0.13.5 /uv /uvx /bin/
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
+    UV_PROJECT_ENVIRONMENT=/opt/venv \
+    PATH="/opt/venv/bin:$PATH"
 WORKDIR /app
 
-# Required to install mysqlclient with Pip
-RUN apt-get update \
-  && apt-get install python3-dev default-libmysqlclient-dev gcc -y
+FROM base AS dependencies
+COPY pyproject.toml uv.lock ./
+RUN uv sync --locked --no-dev --no-install-project
 
-# Install pipenv
-RUN pip install --upgrade pip
-RUN pip install pipenv
+FROM dependencies AS development
+RUN uv sync --locked --all-groups --no-install-project
+COPY . .
+EXPOSE 8000
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-# Install application dependencies
-COPY Pipfile Pipfile.lock /app/
-# We use the --system flag so packages are installed into the system python
-# and not into a virtualenv. Docker containers don't need virtual environments.
-RUN pipenv install --system --dev
-
-# Copy the application files into the image
-COPY . /app/
-
-# Expose port 80 on the container
-EXPOSE 80
+FROM base AS production
+COPY --from=dependencies /opt/venv /opt/venv
+RUN useradd --create-home --uid 10001 app
+COPY --chown=app:app . .
+RUN mkdir -p /app/media /app/static && chown app:app /app/media /app/static
+USER app
+ENV DJANGO_SETTINGS_MODULE=storefront.settings.prod
+EXPOSE 8000
+ENTRYPOINT ["./docker-entrypoint.sh"]
+CMD ["gunicorn", "storefront.wsgi:application", "--bind", "0.0.0.0:8000", "--access-logfile", "-", "--error-logfile", "-"]

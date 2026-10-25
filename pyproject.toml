@@ -1,0 +1,62 @@
+[project]
+name = "storefront3"
+version = "0.1.0"
+description = "Storefront API built with Django REST Framework"
+requires-python = ">=3.14,<3.16"
+dependencies = [
+    "celery[redis]>=5.6.3,<6",
+    "django>=5.2.18,<5.3",
+    "django-cors-headers>=4.9.0,<5",
+    "django-filter>=26.2,<27",
+    "django-storages[s3]>=1.14.6,<2",
+    "djangorestframework>=3.18.3,<4",
+    "djangorestframework-simplejwt>=5.5.1,<6",
+    "djoser>=2.3.5,<3",
+    "drf-nested-routers>=0.95.3,<0.96",
+    "environs[django]>=15.2.0,<16",
+    "gunicorn>=26.2.0,<27",
+    "pillow>=13.0.0,<14",
+    "psycopg[binary]>=3.3.6,<4",
+    "redis>=6.4.0,<7",
+    "requests>=2.32.5,<3",
+    "whitenoise>=6.12.0,<7",
+]
+
+[dependency-groups]
+dev = [
+    "django-debug-toolbar>=8.0.0,<9",
+    "django-silk>=5.6.0,<6",
+    "djlint>=1.47.0,<2",
+    "model-bakery>=1.24.2,<2",
+    "pip-audit>=2.10.1,<3",
+    "pre-commit>=4.7.0,<5",
+    "pytest>=9.1.1,<10",
+    "pytest-django>=4.14.0,<5",
+    "pytest-watcher>=0.6.3,<0.7",
+    "ruff==0.17.2",
+]
+load = [
+    "locust>=2.47.0,<3",
+]
+monitoring = [
+    "flower>=2.2.0,<3",
+]
+
+[tool.ruff]
+target-version = "py314"
+line-length = 88
+extend-exclude = ["**/migrations/**"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"storefront/settings/*.py" = ["F405"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "storefront.settings.test"
+testpaths = ["store/tests", "core/tests"]
+
+[tool.djlint]
+profile = "django"
+indent = 2
