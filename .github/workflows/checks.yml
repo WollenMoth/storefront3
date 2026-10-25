@@ -9,6 +9,9 @@ on:
 permissions:
   contents: read
 
+env:
+  UV_MANAGED_PYTHON: "true"
+
 jobs:
   hygiene:
     runs-on: ubuntu-latest
