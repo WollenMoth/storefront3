@@ -1,6 +1,6 @@
 [project]
 name = "storefront3"
-version = "0.1.0"
+version = "0.1.1"
 description = "Storefront API built with Django REST Framework"
 requires-python = ">=3.14,<3.16"
 dependencies = [
@@ -41,6 +41,9 @@ load = [
 monitoring = [
     "flower>=2.2.0,<3",
 ]
+
+[tool.uv]
+prerelease = "disallow"
 
 [tool.ruff]
 target-version = "py314"
