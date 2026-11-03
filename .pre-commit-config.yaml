@@ -32,8 +32,6 @@ repos:
     rev: 0.13.5
     hooks:
       - id: uv-lock
-      - id: uv-export
-        args: [--frozen, --no-dev, --output-file=requirements.txt, --quiet]
 
   - repo: local
     hooks:
