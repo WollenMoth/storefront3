@@ -31,20 +31,20 @@
 ## Python Tooling and Checks
 
 - Use `uv` for dependency management. Add and remove dependencies with `uv`
-  commands; commit `pyproject.toml`, `uv.lock` and the generated requirements.
+  commands; commit `pyproject.toml` and `uv.lock`.
 - Change Python dependencies in the manifest and regenerate the lock. Do not
-  edit `uv.lock` or `requirements.txt` by hand.
+  edit `uv.lock` by hand.
 - Install both hook types after setup or any hook stage changes:
 
   ```bash
   uv run pre-commit install --hook-type pre-commit --hook-type pre-push
   ```
 
-- Rely on `git commit` for Ruff, djLint, markdownlint, lock/export and hygiene
+- Rely on `git commit` for Ruff, djLint, markdownlint, lock and hygiene
   hooks. Rely on `git push` for the project check hook. Run tools manually only
   to diagnose a failure or when explicitly requested. CI runs all checks.
-- Before opening or updating any dependency PR, require a current lock and
-  export, compatible installed dependencies, Django system checks, no missing
+- Before opening or updating any dependency PR, require a current lock,
+  compatible installed dependencies, Django system checks, no missing
   migrations, passing pytest tests and a clean dependency security audit.
 - Required CI includes Python 3.14 tests on SQLite and PostgreSQL, all-file
   hooks, and the production container build and smoke check. Python 3.15 is an
