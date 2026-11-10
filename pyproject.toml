@@ -33,7 +33,7 @@ dev = [
     "pytest>=9.1.1,<10",
     "pytest-django>=4.14.0,<5",
     "pytest-watcher>=0.6.3,<0.7",
-    "ruff==0.17.3",
+    "ruff==0.17.4",
 ]
 load = [
     "locust>=2.47.0,<3",
