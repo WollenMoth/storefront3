@@ -12,7 +12,7 @@ dependencies = [
     "djangorestframework>=3.18.3,<4",
     "djangorestframework-simplejwt>=5.5.1,<6",
     "djoser>=2.3.5,<3",
-    "drf-nested-routers>=0.95.3,<0.96",
+    "drf-nested-routers>=0.95.3,<0.97",
     "environs[django]>=15.2.0,<16",
     "gunicorn>=26.2.0,<27",
     "pillow>=13.0.0,<14",
@@ -33,7 +33,7 @@ dev = [
     "pytest>=9.1.1,<10",
     "pytest-django>=4.14.0,<5",
     "pytest-watcher>=0.6.3,<0.7",
-    "ruff==0.17.3",
+    "ruff==0.17.6",
 ]
 load = [
     "locust>=2.47.0,<3",
